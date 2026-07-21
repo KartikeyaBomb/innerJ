@@ -33,8 +33,7 @@ export function RunPromptButton({ prompt, provider = "chatgpt" }: { prompt: stri
     <button className="button button-primary" onClick={() => variables.length ? setCustomizing(true) : launch()}><ExternalLink size={14} /> {copied ? "Copied — paste it there" : `Run in ${target.label}`}</button>
     {customizing ? <div className="customize-overlay" role="presentation" onMouseDown={() => setCustomizing(false)}>
       <form className="customize-dialog" role="dialog" aria-modal="true" aria-label="Customize prompt" onMouseDown={(event) => event.stopPropagation()} onSubmit={(event) => { event.preventDefault(); void launch(); }}>
-        <div className="customize-heading"><div><span className="eyebrow">Customize prompt</span><h2>Make it yours</h2></div><button type="button" className="icon-button" onClick={() => setCustomizing(false)} aria-label="Close"><X size={17} /></button></div>
-        <p>Fill in the reusable parts before opening {target.label}.</p>
+        <div className="customize-heading"><div><span className="eyebrow">Prompt variables</span><h2>Customize</h2></div><button type="button" className="icon-button" onClick={() => setCustomizing(false)} aria-label="Close"><X size={17} /></button></div>
         <div className="customize-fields">{variables.map((name) => <label key={name}><code>{name}</code><textarea rows={2} required value={values[name] ?? ""} onChange={(event) => setValues((current) => ({ ...current, [name]: event.target.value }))} placeholder={`Replace “${name}” with…`} /></label>)}</div>
         <button className="button button-primary button-wide"><ExternalLink size={15} /> Copy and open {target.label}</button>
       </form>

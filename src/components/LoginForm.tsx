@@ -27,7 +27,6 @@ export function LoginForm() {
         </svg>
         Continue with Google
       </a>
-      <p className="auth-terms">By continuing, you agree to use InnerJ responsibly.</p>
     </div>
   );
 }

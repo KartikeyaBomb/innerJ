@@ -36,7 +36,6 @@ export async function cacheSet(key: string, value: unknown, ttlSeconds = 60): Pr
     const connected = await client();
     await connected?.set(key, JSON.stringify(value), { EX: ttlSeconds });
   } catch {
-    // Cache failures should not fail user requests.
   }
 }
 
@@ -56,6 +55,5 @@ export async function bumpContentVersion(): Promise<void> {
     const connected = await client();
     await connected?.incr("innerj:content-version");
   } catch {
-    // Best-effort invalidation.
   }
 }

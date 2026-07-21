@@ -349,7 +349,6 @@ textarea { resize: vertical; line-height: 1.55; }
   .collection-heading { align-items: flex-start; flex-direction: column; }
 }
 
-/* InnerJ's quieter community skin: dense, useful, and a little unfinished. */
 :root {
   --background: #f3f2ed;
   --surface: #faf9f5;

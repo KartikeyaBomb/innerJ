@@ -23,8 +23,8 @@ export default async function HomePage({
       <section className="feed-panel">
         <div className="feed-header">
           <div>
-            <span className="eyebrow">/ community feed</span>
-            <h2>{query ? `Results for “${query}”` : tag ? `#${tag}` : community || "what people are building"}</h2>
+            <span className="eyebrow">Prompts</span>
+            <h2>{query ? `Results for “${query}”` : tag ? `#${tag}` : community || "All prompts"}</h2>
           </div>
         </div>
 

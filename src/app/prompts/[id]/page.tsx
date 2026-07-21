@@ -56,7 +56,7 @@ export default async function PromptDetailPage({ params }: { params: Promise<{ i
 
       <section className="discussion" id="discussion">
         <div className="section-heading">
-          <div><span className="eyebrow">Community notes</span><h2>Discussion</h2></div>
+          <div><span className="eyebrow">Comments</span><h2>Discussion</h2></div>
           <MessageCircle size={21} />
         </div>
         {session ? <CommentForm promptId={prompt.id} /> : <p className="feed-notice">Sign in to join the discussion.</p>}
@@ -67,7 +67,7 @@ export default async function PromptDetailPage({ params }: { params: Promise<{ i
               <div><div className="comment-meta"><strong>{comment.authorName}</strong><span>@{comment.authorUsername}</span><span>·</span><span>{formatRelativeDate(comment.createdAt)}</span></div><p>{comment.body}</p></div>
             </article>
           ))}
-          {comments.length === 0 ? <div className="empty-discussion">No comments yet. Add the first concrete improvement or use case.</div> : null}
+          {comments.length === 0 ? <div className="empty-discussion">No comments.</div> : null}
         </div>
       </section>
     </div>

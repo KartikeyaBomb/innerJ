@@ -31,7 +31,7 @@ export function CommentForm({ promptId }: { promptId: string }) {
 
   return (
     <form className="comment-form" onSubmit={submit}>
-      <textarea name="body" minLength={2} maxLength={2000} required rows={3} placeholder="Share an improvement, use case, or result…" />
+      <textarea name="body" minLength={2} maxLength={2000} required rows={3} placeholder="Add a comment" />
       <div className="comment-form-footer">
         {error ? <span className="form-error">{error}</span> : <span />}
         <button className="button button-primary" disabled={pending}>{pending ? "Posting…" : <><Send size={15} /> Post</>}</button>

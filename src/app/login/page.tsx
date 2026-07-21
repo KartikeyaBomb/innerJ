@@ -1,4 +1,3 @@
-import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { LoginForm } from "@/components/LoginForm";
 import { getSessionUser } from "@/lib/auth";
@@ -13,12 +12,8 @@ export default async function LoginPage() {
     <div className="auth-page">
       <section className="auth-card">
         <div className="brand auth-brand"><span className="brand-mark">ij</span><span>innerj<span className="brand-dot">.</span></span></div>
-        
         <h1>Welcome to InnerJ.</h1>
-       
-       
-          <LoginForm />
-        
+        <LoginForm />
       </section>
     </div>
   );

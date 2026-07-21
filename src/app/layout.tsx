@@ -5,10 +5,10 @@ import { getSessionUser } from "@/lib/auth";
 
 export const metadata: Metadata = {
   title: {
-    default: "InnerJ — Prompt engineering community",
+    default: "InnerJ",
     template: "%s | InnerJ"
   },
-  description: "Share, customize, discuss, and collect high-quality AI prompts."
+  description: "Publish, customize, and save prompts."
 };
 
 export const dynamic = "force-dynamic";

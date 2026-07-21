@@ -15,7 +15,7 @@ export default async function CollectionsPage() {
   return (
     <div className="page-container">
       <section className="page-heading heading-with-action">
-        <div><span className="eyebrow">Library</span><h1>Your collections</h1><p>Organize prompts by project, role, workflow, or experiment.</p></div>
+        <div><span className="eyebrow">Saved</span><h1>Your collections</h1></div>
         <CollectionForm />
       </section>
 

@@ -76,7 +76,7 @@ export function PromptComposer({ communities }: { communities: string[] }) {
       <div className="form-grid two-column">
         <label>
           Title
-          <input name="title" minLength={5} maxLength={120} required placeholder="What does this prompt help someone do?" />
+          <input name="title" minLength={5} maxLength={120} required placeholder="Prompt title" />
         </label>
         <label>
           Model used
@@ -91,7 +91,7 @@ export function PromptComposer({ communities }: { communities: string[] }) {
 
       <label>
         Description
-        <textarea name="description" minLength={10} maxLength={320} required rows={3} placeholder="A concise explanation of the workflow and expected result." />
+        <textarea name="description" minLength={10} maxLength={320} required rows={3} placeholder="What does this prompt do?" />
       </label>
 
       <label>
@@ -108,7 +108,7 @@ export function PromptComposer({ communities }: { communities: string[] }) {
           Community
           <input name="community" list="community-options" required minLength={2} maxLength={48} placeholder="Choose or enter a community" />
           <datalist id="community-options">{communities.map((community) => <option value={community} key={community} />)}</datalist>
-          <span className="field-help">Choose an existing community or enter a clear name to establish a new one.</span>
+          <span className="field-help">Select a community or enter a new one.</span>
         </label>
         <label>
           Tags <span className="muted">(comma separated)</span>
@@ -119,7 +119,7 @@ export function PromptComposer({ communities }: { communities: string[] }) {
       {error ? <p className="form-error">{error}</p> : null}
       <div className="composer-actions">
         <button className="button button-primary" disabled={pending}>
-          {pending ? "Analyzing and publishing…" : "Publish prompt"}
+          {pending ? "Publishing…" : "Publish prompt"}
         </button>
       </div>
     </form>

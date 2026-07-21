@@ -15,10 +15,10 @@ export default async function ProfilePage({ params }: { params: Promise<{ userna
       <section className="profile-header">
         <Avatar name={profile.user.name} image={profile.user.avatarUrl} size="lg" />
         <div className="profile-copy">
-          <span className="eyebrow">Creator profile</span>
+          <span className="eyebrow">Profile</span>
           <h1>{profile.user.name}</h1>
           <span className="profile-username">@{profile.user.username}</span>
-          <p>{profile.user.bio || "Building reusable AI workflows on InnerJ."}</p>
+          {profile.user.bio ? <p>{profile.user.bio}</p> : null}
           <div className="profile-stats">
             <span><FileText size={16} /> {profile.user.promptCount} prompts</span>
             <span><CalendarDays size={16} /> Joined {new Date(profile.user.createdAt).toLocaleDateString("en-US", { month: "short", year: "numeric" })}</span>
@@ -27,7 +27,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ userna
       </section>
 
       <section className="feed-panel profile-prompts">
-        <div className="feed-header"><div><span className="eyebrow">Published work</span><h2>Prompts</h2></div></div>
+        <div className="feed-header"><div><span className="eyebrow">Posts</span><h2>Prompts</h2></div></div>
         <div className="prompt-list">
           {profile.prompts.map((prompt) => <PromptCard key={prompt.id} prompt={prompt} signedIn={Boolean(session)} provider={session?.defaultProvider} />)}
         </div>

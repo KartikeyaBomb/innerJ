@@ -13,9 +13,8 @@ export default async function NewPromptPage() {
   return (
     <div className="page-container narrow-page">
       <section className="page-heading">
-        <span className="eyebrow">Create</span>
-        <h1>Share a reusable prompt</h1>
-        <p>Give the community enough context to understand where it works, how to use it, and what to improve.</p>
+        <span className="eyebrow">New prompt</span>
+        <h1>Create a prompt</h1>
       </section>
       <PromptComposer communities={communities} />
     </div>
