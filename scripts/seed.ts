@@ -1,7 +1,10 @@
 import postgres from "postgres";
 
 const connectionString =
-  process.env.DATABASE_URL ?? "postgres://innerj:innerj@localhost:5432/innerj";
+  process.env.POSTGRES_URL_NON_POOLING ??
+  process.env.DATABASE_URL ??
+  process.env.POSTGRES_URL ??
+  "postgres://innerj:innerj@localhost:5432/innerj";
 
 const sql = postgres(connectionString, { transform: postgres.camel });
 
