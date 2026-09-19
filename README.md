@@ -1,25 +1,14 @@
 # InnerJ
 
-A full-stack prompt engineering community built with Next.js, TypeScript, PostgreSQL, and Redis.
+InnerJ is a place to share AI prompts, find useful ones, and discuss how to make them better.
 
-InnerJ lets people publish reusable prompts to communities, add tags, discuss improvements, save prompts into collections, and hand customized prompts off to their preferred AI provider.
+You can post prompts in communities, browse by tag, and save favorites in collections. Prompts can also have variables you fill in before sending them to your preferred AI provider.
 
-## Included
+Built with Next.js, TypeScript, PostgreSQL, and Redis.
 
-- Next.js App Router with React Server Components and Route Handlers
-- TypeScript across UI, server routes, database access, and scripts
-- PostgreSQL schema with full-text search and indexes for feed retrieval
-- Redis feed/search caching with version-based invalidation and graceful fallback
-- Google OAuth with signed, HTTP-only application sessions
-- Chronological community feed with community and tag filtering
-- User-selected communities and user-written tags
-- Customizable prompt variables with handoff to the user's preferred AI provider
-- Discussions, profiles, saves, and collections
-- Responsive interface with no external UI framework
-- Docker Compose for local PostgreSQL and Redis
-- Seed data, health endpoint, and production Dockerfile
+## Run locally
 
-## Local setup
+You'll need Node.js, npm, and Docker.
 
 1. Copy the environment file:
 
@@ -48,27 +37,25 @@ npm run db:check
 npm run dev
 ```
 
-Open `http://localhost:3000`.
+Open [localhost:3000](http://localhost:3000).
 
-## Google authentication
+## Set up Google sign-in
 
-InnerJ only accepts Google sign-in. Create an OAuth 2.0 Web application in Google Cloud Console and add this authorized redirect URI for local development:
+InnerJ uses Google for sign-in. Create an OAuth 2.0 Web application in Google Cloud Console and add this authorized redirect URI:
 
 ```text
 http://localhost:3000/api/auth/google/callback
 ```
 
-Then set `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` in `.env.local`. The authorization-code flow uses state, nonce, and PKCE validation. A user record is created from Google's verified email, name, and profile image on first sign-in.
+Add your `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` to `.env.local`, and replace `AUTH_SECRET` with a long random string. Restart the app after changing these values.
 
-## Feed retrieval
+Your first sign-in creates a profile using your Google name, email, and profile image.
 
-The public feed is chronological. PostgreSQL indexes cover community/recency, author retrieval, tag joins, comments, collections, and full-text search.
+## How it works
 
-## Redis behavior
+The feed shows the newest prompts first. PostgreSQL stores the data and handles search. Redis caches feed and search results, and content changes invalidate those caches. If Redis is unavailable, the app reads directly from PostgreSQL.
 
-Feed cache keys include a global content version. Mutations increment that version, invalidating old feed and search results without wildcard key deletion. If Redis is absent or temporarily unavailable, requests continue directly against PostgreSQL.
-
-## API map
+## API routes
 
 | Route | Purpose |
 |---|---|
@@ -82,13 +69,10 @@ Feed cache keys include a global content version. Mutations increment that versi
 | `DELETE /api/collections/:id/prompts/:promptId` | Remove a saved prompt |
 | `GET /api/health` | Verify PostgreSQL connectivity |
 
-## Production notes
+## Deployment
 
-- Set a strong `AUTH_SECRET`.
-- Use a pooled PostgreSQL connection string in serverless deployments.
-- Put rate limits and abuse controls in front of login, comments, and publishing routes.
-- Add email/OAuth verification before treating accounts as verified identities.
+The repo includes a production Dockerfile. Before deploying:
 
-## Resume metrics
-
-The repository implements the functionality described by the project bullets, but user counts, processed-prompt counts, and latency improvements must come from an actual deployment and measured analytics. Do not claim `100+ users`, `1,000+ prompts`, or a `58%` performance improvement until those figures are observed and documented.
+- Set a strong `AUTH_SECRET` and configure Google sign-in for your production URL.
+- Use a pooled PostgreSQL connection string for serverless deployments.
+- Add rate limits for sign-in, comments, and publishing.
