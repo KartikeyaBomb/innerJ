@@ -55,7 +55,7 @@ Your first sign-in creates a profile using your Google name, email, and profile 
 
 The feed shows the newest prompts first. PostgreSQL stores the data and handles search. Redis caches feed and search results, and content changes invalidate those caches. If Redis is unavailable, the app reads directly from PostgreSQL.
 
-Signed-in members also see six sample prompts across Everyday Life, Learning, Writing, Creativity, and Coding. These examples live in `src/lib/sample-prompts.ts` and are never inserted into the database. They support search, community and tag filters, copying, and opening in an AI provider; saving and commenting are reserved for real posts.
+Signed-in members also see 20 sample prompts across Everyday Life, Learning, Writing, Creativity, and Coding. These examples live in `src/lib/sample-prompts.ts` and are never inserted into the database. They support search, community and tag filters, copying, and opening in an AI provider; saving and commenting are reserved for real posts.
 
 ## API routes
 

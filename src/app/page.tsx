@@ -39,7 +39,6 @@ export default async function HomePage({
 
         {samples.length > 0 ? (
           <section aria-label="Sample prompts">
-            <p className="feed-notice">Sample prompts to explore. Open one to copy it or try it with your AI provider.</p>
             <div className="prompt-list">
               {samples.map((prompt) => <PromptCard key={prompt.id} prompt={prompt} signedIn={Boolean(session)} provider={session?.defaultProvider} />)}
             </div>
