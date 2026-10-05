@@ -2,25 +2,25 @@ import type { PromptFeedItem } from "@/types";
 
 const examples = [
   {
-    slug: "a-kind-message", authorName: "Maya Chen", authorUsername: "maya-c", community: "Everyday Life", title: "Find the words for a kind message",
+    slug: "a-kind-message", authorName: "MChen", authorUsername: "maya-c", community: "Everyday Life", title: "Find the words for a kind message",
     description: "For when you know what you feel, but not quite how to say it.",
     content: "Help me write a short, thoughtful message to {{person}} about {{situation}}. Keep it warm and natural, like something I would actually send. Please avoid making it overly formal or dramatic.",
     tags: ["relationships", "writing"], model: "ChatGPT"
   },
   {
-    slug: "learn-something-new", authorName: "Leo Martin", authorUsername: "leo-m", community: "Learning", title: "Explain it like we’re having a conversation",
+    slug: "learn-something-new", authorName: "Leon", authorUsername: "leo-m", community: "Learning", title: "Explain it like we’re having a conversation",
     description: "A friendly starting point for something you have always wondered about.",
     content: "I want to understand {{topic}}. Explain it in plain language with one example from everyday life. Then ask me a simple question so we can talk through it together.",
     tags: ["learning", "curiosity"], model: "ChatGPT"
   },
   {
-    slug: "a-calmer-day", authorName: "Aisha Patel", authorUsername: "aisha-p", community: "Everyday Life", title: "Make a little room in my day",
+    slug: "a-calmer-day", authorName: "Aish123412", authorUsername: "aisha-p", community: "Everyday Life", title: "Make a little room in my day",
     description: "A gentle plan for a day that feels a bit too full.",
     content: "Here is what I have on my mind today: {{tasks}}. Help me pick a few things that matter most and make a realistic plan. Include time to eat, take breaks, and leave something for tomorrow if needed.",
     tags: ["planning", "balance"], model: "ChatGPT"
   },
   {
-    slug: "tell-a-small-story", authorName: "Sam Rivera", authorUsername: "sam-r", community: "Writing", title: "Turn a small memory into a story",
+    slug: "tell-a-small-story", authorName: "Sam$@#", authorUsername: "sam-r", community: "Writing", title: "Turn a small memory into a story",
     description: "You do not need a big adventure to have a story worth telling.",
     content: "Help me turn this memory into a short personal story: {{memory}}. Keep the details honest and the language simple. Ask me about anything you need rather than inventing what happened.",
     tags: ["writing", "storytelling"], model: "Claude"
@@ -32,7 +32,7 @@ const examples = [
     tags: ["creativity", "hobbies"], model: "ChatGPT"
   },
   {
-    slug: "a-small-coding-step", authorName: "Eli Brooks", authorUsername: "eli-b", community: "Coding", title: "Help me take the next small step",
+    slug: "a-small-coding-step", authorName: "CroookBrooks", authorUsername: "eli-b", community: "Coding", title: "Help me take the next small step",
     description: "A patient coding partner when you are not sure where to start.",
     content: "I am trying to build {{idea}}, and I know {{experience}}. Help me choose one small thing to do first. Explain it simply, show a short example, and let me try before moving on.",
     tags: ["coding", "beginners"], model: "Claude"
@@ -53,7 +53,7 @@ const examples = [
   },
   {
     "slug": "catch-up",
-    "authorName": "Zoe Ellis",
+    "authorName": "xamlle",
     "authorUsername": "zoe-e",
     "community": "Everyday Life",
     "title": "Reach out to an old friend",
@@ -109,7 +109,7 @@ const examples = [
   },
   {
     "slug": "practice-a-language",
-    "authorName": "Mateo Cruz",
+    "authorName": "Msdfa",
     "authorUsername": "mateo-c",
     "community": "Learning",
     "title": "Practice a few words in another language",
@@ -123,7 +123,7 @@ const examples = [
   },
   {
     "slug": "reading-companion",
-    "authorName": "Iris Bell",
+    "authorName": "Ill",
     "authorUsername": "iris-b",
     "community": "Learning",
     "title": "Think a little more about what I read",
@@ -165,7 +165,7 @@ const examples = [
   },
   {
     "slug": "clearer-email",
-    "authorName": "Jules Hart",
+    "authorName": "Jutxa",
     "authorUsername": "jules-h",
     "community": "Writing",
     "title": "Make this email easier to read",
