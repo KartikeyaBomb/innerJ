@@ -73,6 +73,7 @@ The feed shows the newest prompts first. PostgreSQL stores the data and handles 
 
 The repo includes a production Dockerfile. Before deploying:
 
-- Set a strong `AUTH_SECRET` and configure Google sign-in for your production URL.
+- Set `APP_URL` to your full production URL, including `https://` (for example, `https://inner-j.vercel.app`). This variable is used only on the server.
+- Set a strong `AUTH_SECRET` and configure Google sign-in with the authorized redirect URI `<APP_URL>/api/auth/google/callback`.
 - Use a pooled PostgreSQL connection string for serverless deployments.
 - Add rate limits for sign-in, comments, and publishing.

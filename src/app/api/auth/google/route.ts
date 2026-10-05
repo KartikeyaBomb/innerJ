@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
   const verifier = randomValue();
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(verifier));
   const challenge = Buffer.from(digest).toString("base64url");
-  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? request.nextUrl.origin;
+  const appUrl = process.env.APP_URL ?? request.nextUrl.origin;
   const callbackUrl = new URL("/api/auth/google/callback", appUrl).toString();
 
   const authorizationUrl = new URL("https://accounts.google.com/o/oauth2/v2/auth");

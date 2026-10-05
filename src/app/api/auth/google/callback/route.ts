@@ -17,7 +17,7 @@ function finish(response: NextResponse) {
 }
 
 function loginError(request: NextRequest, reason: string) {
-  const loginUrl = new URL("/login", process.env.NEXT_PUBLIC_APP_URL ?? request.nextUrl.origin);
+  const loginUrl = new URL("/login", process.env.APP_URL ?? request.nextUrl.origin);
   loginUrl.searchParams.set("error", reason);
   return finish(NextResponse.redirect(loginUrl));
 }
@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? request.nextUrl.origin;
+    const appUrl = process.env.APP_URL ?? request.nextUrl.origin;
     const callbackUrl = new URL("/api/auth/google/callback", appUrl).toString();
     const tokenResponse = await fetch("https://oauth2.googleapis.com/token", {
       method: "POST",
