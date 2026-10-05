@@ -1,3 +1,4 @@
+import { samplePrompts } from "@/lib/sample-prompts";
 import { redirect } from "next/navigation";
 import { PromptComposer } from "@/components/PromptComposer";
 import { getSessionUser } from "@/lib/auth";
@@ -8,7 +9,7 @@ export const metadata = { title: "Share a prompt" };
 export default async function NewPromptPage() {
   const session = await getSessionUser();
   if (!session) redirect("/login?next=/new");
-  const communities = await getCommunities();
+  const communities = [...new Set([...(await getCommunities()), ...samplePrompts.map((prompt) => prompt.community)])];
 
   return (
     <div className="page-container narrow-page">

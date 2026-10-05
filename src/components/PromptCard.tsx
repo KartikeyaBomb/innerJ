@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { isSamplePrompt } from "@/lib/sample-prompts";
+import { CopyButton } from "@/components/CopyButton";
 import { MessageCircle, Sparkles } from "lucide-react";
 import type { PromptFeedItem, SessionUser } from "@/types";
 import { Avatar } from "@/components/Avatar";
@@ -15,16 +17,19 @@ export function PromptCard({
   signedIn: boolean;
   provider?: SessionUser["defaultProvider"];
 }) {
+  const sample = isSamplePrompt(prompt.id);
+  const author = <>
+    <Avatar name={prompt.authorName} image={prompt.authorAvatarUrl} size="sm" />
+    <span>{prompt.authorName}</span>
+  </>;
+
   return (
     <article className="prompt-card">
       <div className="prompt-card-body">
         <div className="prompt-meta">
-          <Link href={`/profile/${prompt.authorUsername}`} className="author-line">
-            <Avatar name={prompt.authorName} image={prompt.authorAvatarUrl} size="sm" />
-            <span>{prompt.authorName}</span>
-          </Link>
+          {sample ? <span className="author-line">{author}</span> : <Link href={`/profile/${prompt.authorUsername}`} className="author-line">{author}</Link>}
           <span>·</span>
-          <span>{formatRelativeDate(prompt.createdAt)}</span>
+          <span>{sample ? "Sample" : formatRelativeDate(prompt.createdAt)}</span>
           <span>in {prompt.community}</span>
         </div>
 
@@ -46,7 +51,7 @@ export function PromptCard({
             <RunPromptButton prompt={prompt.content} provider={provider} />
             <span><Sparkles size={15} /> {prompt.model}</span>
           </div>
-          <SaveButton promptId={prompt.id} initialSaved={prompt.isSaved} signedIn={signedIn} />
+          {sample ? <CopyButton value={prompt.content} /> : <SaveButton promptId={prompt.id} initialSaved={prompt.isSaved} signedIn={signedIn} />}
         </div>
       </div>
     </article>

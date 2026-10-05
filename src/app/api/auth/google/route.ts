@@ -14,7 +14,7 @@ function randomValue() {
 }
 
 export async function GET(request: NextRequest) {
-  const clientId = process.env.GOOGLE_CLIENT_ID;
+  const clientId = process.env.GOOGLE_CLIENT_ID?.trim();
   if (!clientId) {
     return NextResponse.json({ error: "Google sign-in is not configured." }, { status: 503 });
   }

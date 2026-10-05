@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getSampleFeed } from "@/lib/sample-prompts";
 import { SearchX } from "lucide-react";
 import { PromptCard } from "@/components/PromptCard";
 import { getFeed } from "@/db/queries";
@@ -18,6 +19,8 @@ export default async function HomePage({
   const page = Math.max(1, Number(params.page ?? 1));
   const prompts = await getFeed({ mode, viewerId: session?.id, query, tag, community, page });
 
+  const samples = session ? getSampleFeed({ query, tag, community, page }) : [];
+
   return (
     <div className="page-container feed-page">
       <section className="feed-panel">
@@ -34,7 +37,16 @@ export default async function HomePage({
           ))}
         </div>
 
-        {prompts.length === 0 ? (
+        {samples.length > 0 ? (
+          <section aria-label="Sample prompts">
+            <p className="feed-notice">Sample prompts to explore. Open one to copy it or try it with your AI provider.</p>
+            <div className="prompt-list">
+              {samples.map((prompt) => <PromptCard key={prompt.id} prompt={prompt} signedIn={Boolean(session)} provider={session?.defaultProvider} />)}
+            </div>
+          </section>
+        ) : null}
+
+        {prompts.length === 0 && samples.length === 0 ? (
           <div className="empty-state">
             <SearchX size={34} />
             <h3>No prompts found</h3>

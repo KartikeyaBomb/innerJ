@@ -1,3 +1,4 @@
+import { withSampleCommunities } from "@/lib/sample-prompts";
 import type { ReactNode } from "react";
 import type { SessionUser } from "@/types";
 import { Header } from "@/components/Header";
@@ -10,7 +11,7 @@ export async function AppShell({ user, children }: { user: SessionUser | null; c
     <>
       <Header user={user} />
       <div className="shell">
-        <Sidebar user={user} communities={communities} />
+        <Sidebar user={user} communities={user ? withSampleCommunities(communities) : communities} />
         <main className="main-content">{children}</main>
       </div>
     </>

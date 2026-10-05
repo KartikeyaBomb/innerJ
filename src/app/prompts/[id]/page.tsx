@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { isSamplePrompt, samplePrompts } from "@/lib/sample-prompts";
 import { MessageCircle, Sparkles } from "lucide-react";
 import { notFound } from "next/navigation";
 import { Avatar } from "@/components/Avatar";
@@ -13,21 +14,27 @@ import { formatRelativeDate } from "@/lib/utils";
 export default async function PromptDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const session = await getSessionUser();
-  const [prompt, comments] = await Promise.all([
-    getPromptById(id, session?.id),
-    getComments(id)
-  ]);
+  const sample = isSamplePrompt(id);
+  if (sample && !session) notFound();
+  const [prompt, comments] = sample
+    ? [samplePrompts.find((item) => item.id === id), []]
+    : await Promise.all([
+        getPromptById(id, session?.id),
+        getComments(id)
+      ]);
   if (!prompt) notFound();
 
   return (
     <div className="page-container prompt-detail-page">
       <article className="prompt-detail-card">
         <div className="detail-author-row">
-          <Link href={`/profile/${prompt.authorUsername}`} className="author-line">
-            <Avatar name={prompt.authorName} image={prompt.authorAvatarUrl} />
-            <span><strong>{prompt.authorName}</strong><small>@{prompt.authorUsername}</small></span>
-          </Link>
-          <span className="muted">Published {formatRelativeDate(prompt.createdAt)}</span>
+          {sample ? <span className="author-line"><Avatar name={prompt.authorName} image={prompt.authorAvatarUrl} /><strong>{prompt.authorName}</strong></span> : (
+            <Link href={`/profile/${prompt.authorUsername}`} className="author-line">
+              <Avatar name={prompt.authorName} image={prompt.authorAvatarUrl} />
+              <span><strong>{prompt.authorName}</strong><small>@{prompt.authorUsername}</small></span>
+            </Link>
+          )}
+          <span className="muted">{sample ? "Sample prompt" : `Published ${formatRelativeDate(prompt.createdAt)}`}</span>
         </div>
 
         <div className="detail-title-row">
@@ -38,7 +45,7 @@ export default async function PromptDetailPage({ params }: { params: Promise<{ i
             <h1>{prompt.title}</h1>
             <p>{prompt.description}</p>
           </div>
-          <SaveButton promptId={prompt.id} initialSaved={prompt.isSaved} signedIn={Boolean(session)} />
+          {!sample ? <SaveButton promptId={prompt.id} initialSaved={prompt.isSaved} signedIn={Boolean(session)} /> : null}
         </div>
 
         <div className="prompt-code-block">
@@ -59,7 +66,7 @@ export default async function PromptDetailPage({ params }: { params: Promise<{ i
           <div><span className="eyebrow">Comments</span><h2>Discussion</h2></div>
           <MessageCircle size={21} />
         </div>
-        {session ? <CommentForm promptId={prompt.id} /> : <p className="feed-notice">Sign in to join the discussion.</p>}
+        {sample ? <p className="feed-notice">This is a sample prompt. Copy it or try it with your AI provider.</p> : session ? <CommentForm promptId={prompt.id} /> : <p className="feed-notice">Sign in to join the discussion.</p>}
         <div className="comment-list">
           {comments.map((comment) => (
             <article className="comment" key={comment.id}>
